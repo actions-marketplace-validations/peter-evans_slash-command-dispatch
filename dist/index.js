@@ -393,6 +393,7 @@ class GitHubHelper {
             core.debug(`Getting workflow ${workflowName} for repository ${repository}`);
             const { data: workflows } = yield this.octokit.rest.actions.listRepoWorkflows(Object.assign({}, this.parseRepository(repository)));
             for (const workflow of workflows.workflows) {
+                core.debug(`Found workflow: ${workflow.path}`);
                 if (workflow.path === `${workflowName}.yml` ||
                     workflow.path === `${workflowName}.yaml`) {
                     core.debug(`Selecting workflow file ${workflow.path}`);
